@@ -3,45 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR QR Prototype (Webcam)</title>
-    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.min.js"></script>
+    <title>AR QR Prototype</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://rawgit.com/jeromeetienne/ar.js/2.0.1/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <style>
         body {
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: black;
+            overflow: hidden;
         }
         #video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             z-index: 1;
-        }
-        a-scene {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
         }
     </style>
 </head>
 <body>
-    <!-- Video para mostrar la webcam -->
     <video id="video" autoplay playsinline></video>
-
-    <!-- Escena de A-Frame -->
     <a-scene embedded arjs>
-        <!-- Modelo 3D dinámico -->
-        <a-entity id="model" position="0 0 0"></a-entity>
+        <!-- Entidad para el modelo 3D -->
+        <a-entity id="model" position="0 1 0"></a-entity>
+
+        <!-- Luz para mejor visualización -->
+        <a-light type="directional" position="0 4 -2" intensity="1"></a-light>
         <a-camera-static></a-camera-static>
     </a-scene>
 
@@ -49,41 +37,42 @@
         const video = document.getElementById("video");
         const model = document.getElementById("model");
 
-        // Configuración de la webcam
-        navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
+        // Acceso a la cámara
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+            .then(stream => {
                 video.srcObject = stream;
-                video.play();
             })
-            .catch((err) => console.error("Error al acceder a la cámara:", err));
+            .catch(err => console.error("Error al acceder a la cámara:", err));
 
-        // Escanear QR continuamente desde la webcam
+        // Leer el QR desde la cámara
         video.addEventListener("play", () => {
             const canvas = document.createElement("canvas");
             const context = canvas.getContext("2d");
 
             setInterval(() => {
-                // Capturar el frame de la cámara
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                // Analizar el código QR en el frame
                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
                 const qrCode = jsQR(imageData.data, canvas.width, canvas.height);
 
                 if (qrCode) {
-                    console.log("QR Detectado:", qrCode.data);
-                    loadModelFromQR(qrCode.data); // Cargar el modelo si se detecta un QR
+                    console.log("QR Code detected:", qrCode.data);
+                    loadModelFromQR(qrCode.data);
                 }
-            }, 1000); // Escanear cada segundo
+            }, 1500); // Escanear cada 1.5 segundos
         });
 
-        // Función para cargar el modelo 3D desde la URL del QR
+        // Función para cargar el modelo desde la URL decodificada del QR
         function loadModelFromQR(url) {
-            model.setAttribute("gltf-model", url);
-            model.setAttribute("scale", "0.5 0.5 0.5");
-            model.setAttribute("position", "0 1 0");
+            if (url.endsWith(".glb") || url.endsWith(".gltf")) {
+                console.log("Cargando modelo:", url);
+                model.setAttribute("gltf-model", url);
+                model.setAttribute("scale", "0.5 0.5 0.5");
+                model.setAttribute("position", "0 1 0");
+            } else {
+                console.error("El QR no contiene una URL válida de modelo (.glb o .gltf)");
+            }
         }
     </script>
 </body>

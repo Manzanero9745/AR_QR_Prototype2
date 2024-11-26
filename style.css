@@ -1,0 +1,100 @@
+/* Barra Superior */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.nav-link {
+    font-size: 1.2em;
+}
+
+/* Carrusel */
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/*imagenes carrusel */
+
+.carousel-img {
+    width: 100%; /* Ajusta el ancho al contenedor del carrusel */
+    height: 400px; /* Define una altura fija */
+    object-fit: cover; /* Ajusta la imagen para que llene el espacio sin deformarse */
+}
+
+
+/* Botones de descarga */
+.btn {
+    margin-top: 10px;
+    font-size: 1em;
+}
+
+
+
+/* General */
+body {
+    background-color: #F8F9FA; /* Fondo gris claro */
+    color: #343A40; /* Texto negro */
+    font-family: Arial, sans-serif;
+}
+
+/* Barra Superior */
+.navbar {
+    background-color: #007BFF; /* Azul principal */
+    border-bottom: 3px solid #0056b3; /* Línea de acento */
+}
+
+.navbar-brand, .nav-link {
+    color: #FFFFFF !important; /* Blanco para texto de la barra */
+}
+
+.nav-link:hover {
+    color: #FFD700 !important; /* Amarillo dorado al pasar el cursor */
+}
+
+/* Título de la galería */
+h1 {
+    color: #007BFF; /* Azul principal */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Tarjetas */
+.card {
+    background-color: #ffffff; /* Fondo blanco */
+    border: 1px solid #e0e0e0ff; /* Borde gris claro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Botones de descarga */
+.btn-primary {
+    background-color: #007BFF; /* Azul principal */
+    border-color: #0056b3;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro */
+    border-color: #003d80;
+}
+
+/* Pies de texto en las tarjetas */
+.card-title {
+    color: #343A40; /* Texto negro */
+    font-weight: bold;
+}

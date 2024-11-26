@@ -8,12 +8,17 @@
     font-size: 1.2em;
 }
 
-body {
-    background-image: url('imagen\ \(3\).png'); /* Asegúrate de que la ruta sea correcta */
-    background-size: cover; /* Esto hace que la imagen cubra toda la pantalla */
-    background-position: center center; /* Centra la imagen */
-    background-attachment: fixed;
+#carouselExample {
+    width: 90%; /* Ajusta el ancho si lo necesitas */
+    height: 500px; /* Establece la altura del carrusel (puedes cambiar 500px a lo que necesites) */
+    margin: 0 auto; /* Centra el carrusel */
+    overflow: hidden; /* Evita que cualquier contenido que sobresalga se muestre */
 }
+.carousel-img {
+    width: 100%; /* Hace que las imágenes ocupen el 100% del contenedor */
+    height: auto; /* Mantiene la proporción de las imágenes */
+}
+
 
 
 /* Carrusel */

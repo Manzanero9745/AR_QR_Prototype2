@@ -27,7 +27,7 @@
     <video id="video" autoplay playsinline></video>
     <a-scene embedded arjs>
         <!-- Entidad para el modelo 3D -->
-        <a-entity id="model" position="0 0 -3" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity id="model" position="0 0 -2" rotation="0 180 0" scale="0.5 0.5 0.5"></a-entity>
 
         <!-- Luz para mejor visualización -->
         <a-light type="directional" position="0 4 -2" intensity="2"></a-light>
@@ -72,7 +72,8 @@
                 console.log("Modelo válido:", url);
                 model.setAttribute("gltf-model", url);
                 model.setAttribute("scale", "0.5 0.5 0.5");
-                model.setAttribute("position", "0 0 -3");
+                model.setAttribute("position", "0 0 -2");
+                model.setAttribute("rotation", "0 180 0");  // Rotación de 180 grados en el eje Y
             } else {
                 console.error("El QR no contiene una URL válida de modelo (.glb o .gltf)");
             }

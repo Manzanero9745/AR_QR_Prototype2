@@ -23,19 +23,14 @@
     </style>
 </head>
 <body>
-    <!-- Configuración de video para leer el QR -->
     <video id="video" autoplay playsinline></video>
-
-    <!-- Escena A-Frame con AR.js -->
     <a-scene embedded arjs>
-        <!-- Definimos un marcador que se usará como QR -->
-        <a-marker-camera preset="custom" type="pattern" url="marker.patt">
-            <!-- Modelo 3D que aparecerá y seguirá al marcador -->
-            <a-entity id="model" scale="0.5 0.5 0.5"></a-entity>
-        </a-marker-camera>
+        <!-- Entidad para el modelo 3D -->
+        <a-entity id="model" position="0 1 -6" scale="1 1 1"></a-entity>
 
         <!-- Luz para mejor visualización -->
         <a-light type="directional" position="0 4 -2" intensity="1"></a-light>
+        <a-camera-static></a-camera-static>
     </a-scene>
 
     <script>
@@ -74,7 +69,7 @@
                 console.log("Cargando modelo:", url);
                 model.setAttribute("gltf-model", url);
                 model.setAttribute("scale", "0.5 0.5 0.5");
-                model.setAttribute("position", "0 0 0"); // Se centra sobre el marcador
+                model.setAttribute("position", "0 1 0");
             } else {
                 console.error("El QR no contiene una URL válida de modelo (.glb o .gltf)");
             }
@@ -82,4 +77,3 @@
     </script>
 </body>
 </html>
-

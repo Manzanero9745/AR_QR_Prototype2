@@ -10,7 +10,7 @@
 
 body {
     background-image: url('imagen\ \(3\).png'); /* Asegúrate de que la ruta sea correcta */
-    background-size: cover; /* Esto hace que la imagen cubra toda la pantalla */
+    background-size: contain; /* Esto hace que la imagen cubra toda la pantalla */
     background-position: center center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
 }

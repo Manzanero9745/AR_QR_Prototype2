@@ -27,7 +27,7 @@
     <video id="video" autoplay playsinline></video>
     <a-scene embedded arjs>
         <!-- Entidad para el modelo 3D -->
-        <a-entity id="model" position="-3 -3 0" scale="0.5 0.5 0.5"></a-entity>
+        <a-entity id="model" position="0 0 -3" scale="0.5 0.5 0.5"></a-entity>
 
         <!-- Luz para mejor visualización -->
         <a-light type="directional" position="0 4 -2" intensity="2"></a-light>
@@ -67,11 +67,12 @@
 
         // Función para cargar el modelo desde la URL decodificada del QR
         function loadModelFromQR(url) {
+            console.log("Cargando modelo desde la URL:", url); // Verifica que la URL sea correcta
             if (url.endsWith(".glb") || url.endsWith(".gltf")) {
-                console.log("Cargando modelo:", url);
+                console.log("Modelo válido:", url);
                 model.setAttribute("gltf-model", url);
                 model.setAttribute("scale", "0.5 0.5 0.5");
-                model.setAttribute("position", "0 1 0");
+                model.setAttribute("position", "0 0 -3");
             } else {
                 console.error("El QR no contiene una URL válida de modelo (.glb o .gltf)");
             }
